@@ -2,16 +2,18 @@ const express= require("express");
 const {database} = require("../config/helper");
 const router = express.Router();
 
-router.get("/:rocheta_id" , (req,res)=> {
+router.get("/drugs/:rocheta_id" , (req,res)=> {
     let id = req.params.rocheta_id;
     database.table("rocheta_details").withFields([
+        "id",
         "drug",
-        "description"
-    ]).filter({"rocheta_id": id}).getAll().then(result=> {
-        if (result) {
-            res.send({result: result})
+        "description",
+        "times"
+    ]).filter({"rocheta_id": id , "purchased": 0}).getAll().then(result=> {
+        if (result.length > 0) {
+            res.send({success: true, result: result});
         } else {
-            res.send("no rocheta found")
+            res.send({success: false, msg: "no rocheta found"});
         }
     }).catch(err => console.log(err))
 });
@@ -22,13 +24,14 @@ router.get("/user/:user_id" , (req,res)=> {
         table: "users",
         on: "users.id = rocheta.doctor_id"
     }]).withFields([
+        "rocheta.id",
         "date",
         "CONCAT(users.firstname , ' ' , users.lastname) as doctor",
-    ]).filter({"rocheta.patient_id": id}).get().then(result=> {
+    ]).filter({"rocheta.patient_id": id}).sort({"rocheta.id": -1}).limit(1).get().then(result=> {
         if (result) {
-            res.send({result: result})
+            res.send({success: true, id: result.id, doctor: result.doctor, date: `${result.date.getFullYear()}-${result.date.getMonth()+1}-${result.date.getDate()}`})
         } else {
-            res.send("no rocheta found")
+            res.send({success: false, msg: "no rocheta found"})
         }
     }).catch(err => console.log(err))
 });
@@ -71,9 +74,5 @@ router.post("/addNewDrugs" , (req , res)=> {
         }
     }).catch(err=> console.log(err));
 })
-
-
-
-
 
 module.exports = router
