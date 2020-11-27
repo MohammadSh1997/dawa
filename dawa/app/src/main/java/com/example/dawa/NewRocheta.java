@@ -3,6 +3,7 @@ package com.example.dawa;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -38,12 +39,14 @@ public class NewRocheta extends AppCompatActivity {
     String patientId;
     EditText userEmail;
     EditText noteText;
+    SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_rocheta);
-        doctorId = getIntent().getExtras().getString("id");
+        shared= getSharedPreferences(Login.SHARED_PREFS , MODE_PRIVATE);
+        doctorId = shared.getString("id" , "");
         userEmail = findViewById(R.id.rochetaUserEmail);
         noteText = findViewById(R.id.rochetaNotes);
     }

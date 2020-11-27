@@ -3,6 +3,7 @@ package com.example.dawa;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -31,6 +32,9 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
     EditText email, password;
+    public static final String SHARED_PREFS= "SharedPrefis";
+    SharedPreferences shared;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,10 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         email = findViewById(R.id.editTextEmail);
         password = findViewById(R.id.editTextPassword);
+        shared = getSharedPreferences(SHARED_PREFS , MODE_PRIVATE);
+        if (shared.getBoolean("loggedIn" , false)) {
+            goToActivity();
+        }
     }
 
 
@@ -48,6 +56,17 @@ public class Login extends AppCompatActivity {
 
     public void viewForgotPassword(View view) {
         Toast.makeText(this, "Forgot Password", Toast.LENGTH_SHORT).show();
+    }
+
+    public void goToActivity() {
+        Intent intent = null;
+        if (shared.getString("type" , "").equals("user")) {
+            intent = new Intent(Login.this, User.class);
+        } else {
+            intent = new Intent(Login.this, Doctor.class);
+        }
+        startActivity(intent);
+        finish();
     }
 
     public void logIn(View view) {
@@ -69,18 +88,21 @@ public class Login extends AppCompatActivity {
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
-                                String type = response.get("type").toString();
+                                SharedPreferences.Editor editor = shared.edit();
+                                editor.putString("id" , response.get("id").toString());
+                                editor.putString("email" , response.get("email").toString());
+                                editor.putString("firstname" , response.get("firstname").toString());
+                                editor.putString("lastname" , response.get("lastname").toString());
+                                editor.putString("phone" , response.get("phone").toString());
+                                editor.putString("type" , response.get("type").toString());
+                                editor.putBoolean("loggedIn" , true);
+                                editor.apply();
                                 Intent intent = null;
-                                if (type.equals("user")) {
+                                if (shared.getString("type" , "").equals("user")) {
                                     intent = new Intent(Login.this, User.class);
-                                } else if (type.equals("doctor")) {
+                                } else {
                                     intent = new Intent(Login.this, Doctor.class);
                                 }
-                                intent.putExtra("id" , response.get("id").toString());
-                                intent.putExtra("email" , response.get("email").toString());
-                                intent.putExtra("firstname" , response.get("firstname").toString());
-                                intent.putExtra("lastname" , response.get("lastname").toString());
-                                intent.putExtra("phone" , response.get("phone").toString());
                                 startActivity(intent);
                                 finish();
                             } else {

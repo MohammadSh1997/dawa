@@ -11,19 +11,19 @@
         android:id="@+id/rochetaUserEmail"
         android:layout_width="291dp"
         android:layout_height="60dp"
-        android:layout_marginTop="252dp"
+        android:layout_marginTop="124dp"
         android:ems="10"
         android:hint="Patient Email"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
         android:id="@+id/rochetaNotes"
         android:layout_width="291dp"
         android:layout_height="60dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="20dp"
         android:ems="10"
         android:hint="notes (optional)"
         android:inputType="textPersonName"
@@ -37,10 +37,21 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
         android:onClick="saveRocheta"
-        android:hint="Note (Optional)"
+        style="@style/buttonStyle"
         android:text="Next"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rochetaNotes" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="124dp"
+        android:text="New Rocheta"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

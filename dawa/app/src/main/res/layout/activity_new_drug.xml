@@ -45,40 +45,42 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextDrugName" />
 
-    <EditText
-        android:id="@+id/editTextDrugTimes"
-        android:layout_width="wrap_content"
+    <NumberPicker
+        android:id="@+id/numberPicker1"
+        android:layout_width="124dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:ems="10"
-        android:hint="number of times"
-        android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDrugDesc" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDrugDesc">
+
+    </NumberPicker>
 
     <Button
         android:id="@+id/button5"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="60dp"
         android:onClick="saveDrug"
         android:text="Save Drug"
+        style="@style/buttonStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDrugTimes" />
+        app:layout_constraintTop_toBottomOf="@+id/numberPicker1" />
 
     <Button
         android:id="@+id/button6"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="End Rocheta"
+        android:layout_marginTop="16dp"
         android:onClick="saveRocheta"
+        android:text="End Rocheta"
+        style="@style/buttonStyle"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button5" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

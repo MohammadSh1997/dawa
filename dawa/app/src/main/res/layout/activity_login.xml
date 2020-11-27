@@ -39,21 +39,18 @@
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp">
 
-
                 <TextView
                     style="@style/headerText"
                     android:layout_gravity="center"
                     android:textAlignment="center"
-                    android:text="Dawa"
+                    android:text="DAWACOM"
                     android:layout_marginTop="40dp"/>
                 <include
                     layout="@layout/layout_login"/>
 
             </LinearLayout>
         </RelativeLayout>
-
     </ScrollView>
-
 </RelativeLayout>
 
 

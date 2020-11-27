@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/currentDrugItem"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="2"
+    >
+
+    <LinearLayout
+      android:orientation="vertical"
+      android:layout_width="0dp"
+        android:layout_weight="1"
+      android:layout_height="match_parent"
+    >
+
+        <TextView
+            android:id="@+id/currentDrugName"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/currentDrugDesc"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/currentDrugTimes"
+            android:layout_width="match_parent"
+            android:padding="10dp"
+            android:textSize="20dp"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_height="match_parent"
+        android:layout_width="0dp"
+        android:weightSum="1"
+    >
+
+        <Switch
+            android:id="@+id/currentDrugSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Set Alarm"
+            android:textAlignment="textEnd"
+            android:layout_gravity="end"/>
+    </LinearLayout>
+</LinearLayout>

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,14 +39,16 @@ public class NewDrug extends AppCompatActivity {
     String rocheta_id;
     EditText drugName;
     EditText drugDesc;
-    EditText drugTimes;
+    NumberPicker drugTimes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_drug);
+        drugTimes= findViewById(R.id.numberPicker1);
+        drugTimes.setMaxValue(4);
+        drugTimes.setMinValue(1);
         drugName = findViewById(R.id.editTextDrugName);
         drugDesc = findViewById(R.id.editTextDrugDesc);
-        drugTimes = findViewById(R.id.editTextDrugTimes);
         rocheta_id = getIntent().getExtras().getString("rocheta_id");
         drugsText = findViewById(R.id.drugsText);
         drugsText.setText("You added " + numberOfDrugs + " drugs");
@@ -56,10 +59,15 @@ public class NewDrug extends AppCompatActivity {
         drugsText.setText("You added " + numberOfDrugs + " drugs");
     }
 
+    public void clearEditTexts() {
+        drugName.setText("");
+        drugDesc.setText("");
+    }
+
     public void saveDrug(View view) {
         String name = drugName.getText().toString();
         String desc = drugDesc.getText().toString();
-        String times = drugTimes.getText().toString();
+        String times = drugTimes.getValue()+"";
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -85,6 +93,7 @@ public class NewDrug extends AppCompatActivity {
                             if (success) {
                                 Toast.makeText(NewDrug.this, "Added successfully", Toast.LENGTH_SHORT).show();
                                 addDrugToText();
+                                clearEditTexts();
                             }
                              else {
                                 Toast.makeText(NewDrug.this, response.get("msg").toString(), Toast.LENGTH_SHORT).show();
