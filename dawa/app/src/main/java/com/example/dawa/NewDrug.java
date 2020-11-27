@@ -25,6 +25,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dawa.Config.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -71,7 +72,7 @@ public class NewDrug extends AppCompatActivity {
 
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://192.168.1.76:8080/api/rocheta/addNewDrugs";
+        final String url = Config.URL+"rocheta/addNewDrugs";
 
         Map<String, String> params = new HashMap<String, String>();
 

@@ -26,6 +26,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dawa.Config.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -53,7 +54,7 @@ public class NewRocheta extends AppCompatActivity {
 
     public void getUser(String email) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://192.168.1.76:8080/api/auth/getUser/"+ email;
+        final String url = Config.URL+"auth/getUser/"+ email;
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()
@@ -90,7 +91,7 @@ public class NewRocheta extends AppCompatActivity {
         getUser(userEmail.getText().toString());
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://192.168.1.76:8080/api/rocheta/addNewRocheta";
+        final String url = Config.URL+"rocheta/addNewRocheta";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("patient_id", patientId);

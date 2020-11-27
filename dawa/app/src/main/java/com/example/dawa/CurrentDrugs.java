@@ -18,6 +18,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dawa.Adapters.CurrentDrugsAdapter;
 import com.example.dawa.Adapters.DrugsAdapter;
+import com.example.dawa.Config.Config;
 import com.example.dawa.Models.Drug;
 
 import org.json.JSONArray;
@@ -50,7 +51,7 @@ public class CurrentDrugs extends AppCompatActivity {
 
     public void getDrugs() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://192.168.1.76:8080/api/drugs/currentDrugs/"+ user_id;
+        final String url = Config.URL+"drugs/currentDrugs/"+ user_id;
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()

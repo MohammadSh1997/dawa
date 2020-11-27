@@ -25,6 +25,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dawa.Config.Config;
 import com.example.dawa.Models.Drug;
 import com.example.dawa.R;
 
@@ -95,7 +96,7 @@ public class CurrentDrugsAdapter extends  RecyclerView.Adapter<CurrentDrugsAdapt
     public void purchaseDrug(int position) {
         String id = drugsArray.get(position).getId();
         RequestQueue queue = Volley.newRequestQueue(context);
-        final String url = "http://192.168.1.76:8080/api/drugs/purchaseDrug";
+        final String url = Config.URL+ "drugs/purchaseDrug";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("drug_id", id);
