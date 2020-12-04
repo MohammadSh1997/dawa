@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dawa.Adapters.RochetaAdapter;
+import com.example.dawa.Config.Config;
 import com.example.dawa.Models.Rocheta;
 
 import org.json.JSONException;
@@ -46,7 +47,7 @@ public class UserRocheta extends AppCompatActivity {
 
     public void getRocheta() {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://192.168.1.76:8080/api/rocheta/user/"+ userId;
+        final String url = Config.URL+"rocheta/user/"+ userId;
 
         JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>()

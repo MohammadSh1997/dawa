@@ -23,6 +23,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.dawa.Config.Config;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,7 +73,7 @@ public class Login extends AppCompatActivity {
     public void logIn(View view) {
         //final String url = "http://192.168.1.73:8080/Login/register?userName=" + userName.getText().toString() + "&password=" + password.getText().toString();
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://192.168.1.76:8080/api/auth/login";
+        final String url = Config.URL+ "auth/login";
 
         Map<String, String> params = new HashMap<String, String>();
         params.put("email", email.getText().toString());
