@@ -2,20 +2,15 @@ package com.example.dawa.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -31,13 +26,8 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.dawa.Doctor;
-import com.example.dawa.Login;
 import com.example.dawa.Models.Drug;
-import com.example.dawa.Models.Rocheta;
 import com.example.dawa.R;
-import com.example.dawa.RochetaDrugs;
-import com.example.dawa.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,7 +52,7 @@ public class DrugsAdapter extends  RecyclerView.Adapter<DrugsAdapter.viewitem> {
 
         public viewitem(@NonNull View itemView) {
             super(itemView);
-             drug = itemView.findViewById(R.id.drugName);
+             drug = itemView.findViewById(R.id.rochetaHistoryDate);
              drugCheck = itemView.findViewById(R.id.drugCheck);
             Log.d("drugs" ,""+ drugsArray);
         }

@@ -13,11 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CurrentDrugs"></activity>
+        <activity android:name=".DoctorHistory"></activity>
+        <activity android:name=".CurrentDrugs" />
         <activity android:name=".RochetaDrugs" />
         <activity android:name=".UserRocheta" />
-        <activity android:name=".NewDrug" android:noHistory="true" />
-        <activity android:name=".NewRocheta" android:noHistory="true" />
+        <activity
+            android:name=".NewDrug"
+            android:noHistory="true" />
+        <activity
+            android:name=".NewRocheta"
+            android:noHistory="true" />
         <activity android:name=".ChooseType" />
         <activity android:name=".Doctor" />
         <activity android:name=".User" />

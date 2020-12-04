@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Doctor extends AppCompatActivity {
 
@@ -39,5 +40,9 @@ public class Doctor extends AppCompatActivity {
     public void addNewRocheta(View view) {
         Intent i = new Intent(this , NewRocheta.class);
         startActivity(i);
+    }
+
+    public void history(View view) {
+        Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
     }
 }

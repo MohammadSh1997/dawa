@@ -36,6 +36,33 @@ router.get("/user/:user_id" , (req,res)=> {
     }).catch(err => console.log(err))
 });
 
+router.get("/doctor/:doctor_id" , (req,res)=> {
+    let id = req.params.doctor_id;
+    database.table("rocheta").join([{
+        table: "users",
+        on: "users.id = rocheta.patient_id"
+    }]).withFields([
+        "rocheta.id",
+        "date",
+        "CONCAT(users.firstname , ' ' , users.lastname) as patient",
+    ]).filter({"rocheta.doctor_id": id}).sort({"rocheta.id": -1}).getAll().then(result=> {
+        if (result.length > 0) {
+            for (let i = 0; i < result.length; i++) {
+                result[i].date = `${result[i].date.getFullYear()}-${result[i].date.getMonth()+1}-${result[i].date.getDate()}`;  
+            }
+            res.send({
+                success: true,
+                result
+            })
+        } else {
+            res.send({
+                success: false,
+                msg: "no rocheta found"
+            })
+        }
+    }).catch(err => console.log(err))
+});
+
 router.post("/addNewRocheta" , (req , res)=> {
     const doctor_id = req.body.doctor_id;
     const patient_id = req.body.patient_id;
@@ -74,5 +101,6 @@ router.post("/addNewDrugs" , (req , res)=> {
         }
     }).catch(err=> console.log(err));
 })
+
 
 module.exports = router

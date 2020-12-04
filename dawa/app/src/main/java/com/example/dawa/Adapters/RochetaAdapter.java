@@ -32,8 +32,8 @@ public class RochetaAdapter extends ArrayAdapter<Rocheta> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.custom_list_item, null, true);
         LinearLayout item = view.findViewById(R.id.drugItem);
-        TextView doctorText= view.findViewById(R.id.drugDesc);
-        TextView dateText= view.findViewById(R.id.drugName);
+        TextView doctorText= view.findViewById(R.id.rochetaHistoryPatient);
+        TextView dateText= view.findViewById(R.id.rochetaHistoryDate);
         doctorText.setText(doctorText.getText().toString() + rochetaArray.get(position).getDoctor());
         dateText.setText(dateText.getText().toString() + rochetaArray.get(position).getDate());
         item.setOnClickListener(new View.OnClickListener() {
