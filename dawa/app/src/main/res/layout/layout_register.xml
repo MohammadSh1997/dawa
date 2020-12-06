@@ -30,7 +30,7 @@
             <EditText
                 android:id="@+id/registerFirstName"
                 style="@style/modifiedEditText"
-                android:hint="First name"
+                android:hint="الاسم الأول"
                 android:inputType="text"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -41,7 +41,7 @@
             <EditText
                 android:id="@+id/registerLastName"
                 style="@style/modifiedEditText"
-                android:hint="Last name"
+                android:hint="الاسم الأخير"
                 android:inputType="text"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -52,7 +52,7 @@
             <EditText
                 android:id="@+id/registerMobile"
                 style="@style/modifiedEditText"
-                android:hint="Mobile Number"
+                android:hint="رقم الهاتف"
                 android:inputType="text"
                 android:maxLines="1" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -85,7 +85,7 @@
             style="@style/loginButton"
             android:layout_gravity="center"
             android:onClick="register"
-            android:text="Register" />
+            android:text="تسجيل" />
 
         <TextView
             style="@style/parent"

@@ -1,7 +1,19 @@
 package com.example.dawa.Models;
 
 public class Rocheta {
-    private String id , date , doctor;
+    private String id;
+    private String date;
+    private String doctor;
+
+    public String getPatient() {
+        return patient;
+    }
+
+    public void setPatient(String patient) {
+        this.patient = patient;
+    }
+
+    private String patient;
 
     public String getId() {
         return id;

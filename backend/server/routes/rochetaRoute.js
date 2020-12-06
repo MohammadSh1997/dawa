@@ -13,7 +13,7 @@ router.get("/drugs/:rocheta_id" , (req,res)=> {
         if (result.length > 0) {
             res.send({success: true, result: result});
         } else {
-            res.send({success: false, msg: "no rocheta found"});
+            res.send({success: false, msg: "لا يوجد اي ادوية"});
         }
     }).catch(err => console.log(err))
 });
@@ -31,10 +31,21 @@ router.get("/user/:user_id" , (req,res)=> {
         if (result) {
             res.send({success: true, id: result.id, doctor: result.doctor, date: `${result.date.getFullYear()}-${result.date.getMonth()+1}-${result.date.getDate()}`})
         } else {
-            res.send({success: false, msg: "no rocheta found"})
+            res.send({success: false, msg: "حدث خطأ في الاتصال"})
         }
     }).catch(err => console.log(err))
 });
+
+router.delete("/:rocheta_id" , (req, res)=>{
+    const id = req.params.rocheta_id;
+    database.table("rocheta").filter({"id": id}).remove().then(success=> {
+        if (success) {
+            res.send({success: true});
+        } else {
+            res.send({success: false , msg: "حدث خطأ في الاتصال"});
+        }
+    }).catch(err=> console.log(err))
+})
 
 router.get("/doctor/:doctor_id" , (req,res)=> {
     let id = req.params.doctor_id;
@@ -57,7 +68,7 @@ router.get("/doctor/:doctor_id" , (req,res)=> {
         } else {
             res.send({
                 success: false,
-                msg: "no rocheta found"
+                msg: "لا يوجد اي روشيتا"
             })
         }
     }).catch(err => console.log(err))
@@ -77,7 +88,7 @@ router.post("/addNewRocheta" , (req , res)=> {
         if (id) {
             res.send({success: true , id: id});
         } else {
-            res.send({success: false , msg: "server error"});
+            res.send({success: false , msg: "حدث خطأ في الاتصال"});
         }
     }).catch(err=> console.log(err));
 })
@@ -97,7 +108,7 @@ router.post("/addNewDrugs" , (req , res)=> {
         if (id) {
             res.send({success: true});
         } else {
-            res.send({success: false , msg: "server error"});
+            res.send({success: false , msg: "حدث خطأ في الاتصال"});
         }
     }).catch(err=> console.log(err));
 })

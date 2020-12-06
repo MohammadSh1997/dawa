@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
-import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,19 +44,19 @@ public class NewDrug extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_drug);
-        drugTimes= findViewById(R.id.numberPicker1);
+        drugTimes= findViewById(R.id.numberPicker2);
         drugTimes.setMaxValue(4);
         drugTimes.setMinValue(1);
-        drugName = findViewById(R.id.editTextDrugName);
-        drugDesc = findViewById(R.id.editTextDrugDesc);
+        drugName = findViewById(R.id.historyDrugName);
+        drugDesc = findViewById(R.id.historyDrugDesc);
         rocheta_id = getIntent().getExtras().getString("rocheta_id");
         drugsText = findViewById(R.id.drugsText);
-        drugsText.setText("You added " + numberOfDrugs + " drugs");
+        drugsText.setText("لقد قمت بإضافة  " + numberOfDrugs + " دواء");
     }
 
     public void addDrugToText() {
         numberOfDrugs++;
-        drugsText.setText("You added " + numberOfDrugs + " drugs");
+        drugsText.setText("لقد قمت بإضافة " + numberOfDrugs + " دواء");
     }
 
     public void clearEditTexts() {
@@ -92,7 +91,7 @@ public class NewDrug extends AppCompatActivity {
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
-                                Toast.makeText(NewDrug.this, "Added successfully", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(NewDrug.this, "تم الاضافة بنجاح", Toast.LENGTH_SHORT).show();
                                 addDrugToText();
                                 clearEditTexts();
                             }

@@ -7,8 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorHint">@color/colorPrimary</item>
-        <item name="android:fontFamily">@font/t2</item>
-<!--        <item name="android:fontFamily">@font/walkaway</item>-->
+        <item name="android:fontFamily">@font/cairo</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

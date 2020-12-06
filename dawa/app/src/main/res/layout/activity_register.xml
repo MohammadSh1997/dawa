@@ -36,12 +36,13 @@
                 android:layout_marginTop="40dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginLeft="30dp">
+
                 <TextView
                     style="@style/headerText"
-                    android:textAlignment="center"
                     android:layout_gravity="center"
-                    android:text="DAWACOM"
-                    android:layout_marginTop="40dp"/>
+                    android:layout_marginTop="40dp"
+                    android:text="حبة دوا"
+                    android:textAlignment="center" />
 
                 <include layout="@layout/layout_register" />
 

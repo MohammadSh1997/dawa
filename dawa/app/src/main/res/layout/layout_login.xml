@@ -22,7 +22,7 @@
             android:layout_marginTop="@dimen/loginViewsMargin"
             android:textAlignment="center"
             android:layout_gravity="center"
-            android:text="LOGIN" />
+            android:text="تسجيل الدخول" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textInputEmail"
@@ -54,20 +54,20 @@
 
         <TextView
             style="@style/viewParent"
-            android:text="Forgot Password?"
+            android:text="نسيت كلمة السر؟"
             android:textColor="@color/primaryTextColor"
             android:textSize="@dimen/newsMoreTextSize"
-            android:layout_gravity="end"
+            android:layout_gravity="start"
             android:onClick="viewForgotPassword"
             android:layout_marginTop="10dp"/>
 
         <Button
             android:id="@+id/cirLoginButton"
             style="@style/loginButton"
-            android:text="Login"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/loginViewsMargin"
             android:onClick="logIn"
-            android:layout_marginTop="@dimen/loginViewsMargin"/>
+            android:text="دخول" />
 
         <TextView
             style="@style/parent"

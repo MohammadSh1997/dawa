@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drugItem"
+    android:id="@+id/historyRochetaItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:weightSum="2"
     android:padding="15dp">
 
-    <TextView
-        android:id="@+id/rochetaHistoryDate"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="15dp">
-
-    </TextView>
-
     <CheckBox
         android:id="@+id/drugCheck"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layoutDirection="rtl"
+        android:layoutDirection="ltr"
         />
+
+    <TextView
+        android:id="@+id/rochetaHistoryDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="20dp"></TextView>
 
 </LinearLayout>

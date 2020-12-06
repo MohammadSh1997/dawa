@@ -10,7 +10,7 @@
         android:id="@+id/welcomeUserText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome user"
+        android:text="أهلا"
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,12 +20,12 @@
 
     <Button
         android:id="@+id/button3"
+        style="@style/buttonStyle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
         android:onClick="rochetaClicked"
-        android:text="My rocheta"
-        style="@style/buttonStyle"
+        android:text="الروشيتا"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -33,12 +33,12 @@
 
     <Button
         android:id="@+id/button4"
+        style="@style/buttonStyle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:onClick="logout"
-        style="@style/buttonStyle"
-        android:text="Logout"
+        android:text="خروج"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,12 +46,12 @@
 
     <Button
         android:id="@+id/button7"
+        style="@style/buttonStyle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        style="@style/buttonStyle"
         android:onClick="nearPharmacy"
-        android:text="Near Pharmacy"
+        android:text="أقرب صيدلية"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,12 +59,12 @@
 
     <Button
         android:id="@+id/button8"
+        style="@style/buttonStyle"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        style="@style/buttonStyle"
         android:onClick="currentDrugClicked"
-        android:text="My current drugs"
+        android:text="الأدوية الحالية"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"

@@ -4,33 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewDrug">
-
-    <TextView
-        android:id="@+id/drugsText"
-        android:layout_width="0dp"
-        android:layout_height="28dp"
-        android:layout_marginTop="64dp"
-        android:text=""
-        android:textAlignment="center"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".EditDrug">
 
     <EditText
         android:id="@+id/historyDrugName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="140dp"
         android:ems="10"
-        android:hint="Drug name"
+        android:hint="اسم الدواء"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.569"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/drugsText" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/historyDrugDesc"
@@ -38,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:ems="10"
-        android:hint="Drug description"
+        android:hint="وصف الدواء"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.569"
@@ -58,29 +45,16 @@
     </NumberPicker>
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/editButton"
         style="@style/buttonStyle"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:onClick="saveDrug"
-        android:text="حفظ الدواء"
+        android:onClick="editDrug"
+        android:text="حفظ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/numberPicker2" />
-
-    <Button
-        android:id="@+id/button6"
-        style="@style/buttonStyle"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="saveRocheta"
-        android:text="حفظ الروشيتا"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

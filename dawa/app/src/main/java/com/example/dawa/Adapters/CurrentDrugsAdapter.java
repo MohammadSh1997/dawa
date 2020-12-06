@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,9 +51,9 @@ public class CurrentDrugsAdapter extends  RecyclerView.Adapter<CurrentDrugsAdapt
 
         public viewitem(@NonNull View itemView) {
             super(itemView);
-             drugName = itemView.findViewById(R.id.currentDrugName);
-             drugDesc = itemView.findViewById(R.id.currentDrugDesc);
-             drugTimes = itemView.findViewById(R.id.currentDrugTimes);
+             drugName = itemView.findViewById(R.id.historyDrugName);
+             drugDesc = itemView.findViewById(R.id.historyDrugDesc);
+             drugTimes = itemView.findViewById(R.id.historyDrugTimes);
              drugSwitch = itemView.findViewById(R.id.currentDrugSwitch);
         }
     }
@@ -75,9 +74,9 @@ public class CurrentDrugsAdapter extends  RecyclerView.Adapter<CurrentDrugsAdapt
 
     @Override
     public void onBindViewHolder(@NonNull CurrentDrugsAdapter.viewitem holder, int position) {
-        holder.drugName.setText("drug :"+ drugsArray.get(position).getName());
-        holder.drugDesc.setText("description :"+ drugsArray.get(position).getDescription());
-        holder.drugTimes.setText("times :"+ drugsArray.get(position).getTimes());
+        holder.drugName.setText("الدواء : "+ drugsArray.get(position).getName());
+        holder.drugDesc.setText("الوصف : "+ drugsArray.get(position).getDescription());
+        holder.drugTimes.setText("عدد المرات : "+ drugsArray.get(position).getTimes());
         holder.drugSwitch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

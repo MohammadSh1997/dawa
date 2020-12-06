@@ -25,7 +25,7 @@ public class Doctor extends AppCompatActivity {
         lastname= shared.getString("lastname" , "");
         phone= shared.getString("phone" , "");
         welcomeMsg = findViewById(R.id.welcomeDoctorText);
-        welcomeMsg.setText("Welome Doctor " +firstname);
+        welcomeMsg.setText("أهلا دكتور " +firstname);
     }
 
     public void logout(View view) {
@@ -43,6 +43,7 @@ public class Doctor extends AppCompatActivity {
     }
 
     public void history(View view) {
-        Toast.makeText(this, "History", Toast.LENGTH_SHORT).show();
+        Intent i = new Intent(this, DoctorHistory.class);
+        startActivity(i);
     }
 }

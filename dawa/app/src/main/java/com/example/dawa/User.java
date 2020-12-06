@@ -25,7 +25,7 @@ public class User extends AppCompatActivity {
         lastname= shared.getString("lastname" , "");
         phone= shared.getString("phone" , "");
         welcomeMsg = findViewById(R.id.welcomeUserText);
-        welcomeMsg.setText("Welome User " +firstname);
+        welcomeMsg.setText("أهلا " +firstname);
     }
 
     public void logout(View view) {

@@ -4,7 +4,7 @@ let conn = new mysqli({
     host : 'localhost' , //  IP/domain name  
     post : 3306 , // Port, default 3306  
     user : "root" , // Username  
-    passwd : "root" , // password  
+    passwd : "" , // password  
     db : 'dawa' //You  can specify the database or not [optional]  
 })
 

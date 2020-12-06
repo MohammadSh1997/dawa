@@ -48,13 +48,13 @@ router.post("/login" , (req , res)=> {
                     if (password === user.password) {
                         res.send({success: true, id: user.id , firstname: user.firstname , lastname: user.lastname , email: user.email , phone: user.phone , type: user.type})
                     } else {
-                        res.send({success: false , msg: "password not true"})
+                        res.send({success: false , msg: "كلمة السر غير صحيحة"})
                     }
                 } catch (error) {
-                    res.send({success: false , msg: "Server error! please try again"})
+                    res.send({success: false , msg: "حدث خطأ في الاتصال"})
                 }
             } else {
-                res.send({success: false , msg: "email not found"})
+                res.send({success: false , msg: "البريد الالكتروني غير موجود"})
             }
         }).catch(err=> console.log(err))
 })
@@ -67,11 +67,11 @@ router.get("/getUser/:email" , (req , res)=> {
         if (result) {
             res.send({success: true , id: result.id})
         } else {
-            res.send({success: false , msg: "no email found"})
+            res.send({success: false , msg: "البريد الالكتروني غير مستخدم"})
         }
     }).catch(err=> {
         console.log(err);
-        res.send({success: false , msg: "server error"});
+        res.send({success: false , msg: "حدث خطأ في الاتصال"});
     });
 })
 

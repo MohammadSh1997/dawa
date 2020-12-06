@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,100 +24,69 @@ import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.android.volley.toolbox.Volley;
 import com.example.dawa.Config.Config;
+import com.example.dawa.Models.Drug;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
-public class NewRocheta extends AppCompatActivity {
+public class EditDrug extends AppCompatActivity {
 
-    String doctorId;
-    String patientId;
-    EditText userEmail;
-    EditText noteText;
-    SharedPreferences shared;
-
+    Drug drug;
+    EditText drugName,drugDesc;
+    NumberPicker picker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_rocheta);
-        shared= getSharedPreferences(Login.SHARED_PREFS , MODE_PRIVATE);
-        doctorId = shared.getString("id" , "");
-        userEmail = findViewById(R.id.rochetaUserEmail);
-        noteText = findViewById(R.id.rochetaNotes);
+        setContentView(R.layout.activity_edit_drug);
+        drug = new Drug();
+        drug.setId(getIntent().getExtras().getString("drug_id"));
+        drug.setName(getIntent().getExtras().getString("drug_name"));
+        drug.setDescription(getIntent().getExtras().getString("drug_desc"));
+        drug.setTimes(getIntent().getExtras().getString("drug_times"));
+
+        drugName = findViewById(R.id.historyDrugName);
+        drugDesc = findViewById(R.id.historyDrugDesc);
+        picker = findViewById(R.id.numberPicker2);
+
+        drugName.setText(drug.getName());
+        drugDesc.setText(drug.getDescription());
+
+        picker.setMinValue(1);
+        picker.setMaxValue(4);
+        picker.setValue(Integer.parseInt(drug.getTimes()));
     }
 
-    public void getUser(String email) {
+    public void editDrug(View view) {
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = Config.URL+"auth/getUser/"+ email;
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
-                {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            boolean success = response.getBoolean("success");
-                            if (success) {
-                                patientId = response.getString("id");
-                            } else {
-                                Toast.makeText(NewRocheta.this, response.getString("msg"), Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (Exception jsonException) {
-                            jsonException.printStackTrace();
-                        }
-
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError response) {
-                        Log.d("Error",response.getMessage());
-                    }
-                }
-        );
-        queue.add(getRequest);
-    }
-
-    public void saveRocheta(View view) {
-        if (userEmail.getText().toString().equals("")) {
-            Toast.makeText(this, "يجب ادخال البريد الالكتروني للمريض", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        String notes = noteText.getText().toString();
-        getUser(userEmail.getText().toString());
-
-
-        RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = Config.URL+"rocheta/addNewRocheta";
+        final String url = Config.URL+ "drugs/"+drug.getId();
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("patient_id", patientId);
-        params.put("doctor_id", doctorId);
-        params.put("notes", notes);
+        params.put("name", drugName.getText().toString());
+        params.put("desc", drugDesc.getText().toString());
+        params.put("times", picker.getValue()+"");
 
         JSONObject parameters = new JSONObject(params);
 
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.POST, url, parameters,
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.PUT, url, parameters,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("Response", response.toString());
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
-                                String rocheta_id = response.get("id").toString();
-                                Intent intent = new Intent(NewRocheta.this , NewDrug.class);
-                                intent.putExtra("rocheta_id" , rocheta_id);
-                                startActivity(intent);
+                                Toast.makeText(EditDrug.this, "تم التعديل بنجاح", Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(EditDrug.this, DoctorHistory.class);
+                                startActivity(i);
+                                finish();
+
                             } else {
-                                Toast.makeText(NewRocheta.this, response.get("msg").toString(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditDrug.this, "حدث خطأ في الاتصال", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
@@ -128,7 +96,7 @@ public class NewRocheta extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
-                        Log.d("volley error" , volleyError.toString());
+                        Log.d("volley error" , volleyError.getMessage());
                         String errorDescription = "";
                         if (volleyError instanceof NetworkError) {
                             errorDescription = "Network Error";
@@ -145,7 +113,7 @@ public class NewRocheta extends AppCompatActivity {
                         } else {
                             errorDescription = "Connection Error";
                         }
-                        Toast.makeText(NewRocheta.this, errorDescription, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditDrug.this, errorDescription, Toast.LENGTH_SHORT).show();
                     }
                 }
         );
@@ -154,6 +122,7 @@ public class NewRocheta extends AppCompatActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
+        // add it to the RequestQueue
         queue.add(getRequest);
     }
 }

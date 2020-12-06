@@ -1,12 +1,15 @@
 package com.example.dawa.Adapters;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +30,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.dawa.Config.Config;
-import com.example.dawa.Doctor;
-import com.example.dawa.Login;
+import com.example.dawa.HistoryDrugs;
 import com.example.dawa.Models.Drug;
+import com.example.dawa.Models.Rocheta;
 import com.example.dawa.R;
 
 import org.json.JSONException;
@@ -39,65 +42,80 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DrugsAdapter extends  RecyclerView.Adapter<DrugsAdapter.viewitem> {
+public class HistoryRochetaAdapter extends  RecyclerView.Adapter<HistoryRochetaAdapter.viewitem> {
 
-    ArrayList<Drug> drugsArray;
+    ArrayList<Rocheta> rochetaArray;
     Context context;
 
-    public DrugsAdapter(Context context, ArrayList<Drug> drugsArray) {
+    public HistoryRochetaAdapter(Context context, ArrayList<Rocheta> rochetaArray) {
+        this.rochetaArray = rochetaArray;
         this.context = context;
-        this.drugsArray = drugsArray;
-    }
-
-    public class viewitem extends RecyclerView.ViewHolder {
-        TextView drug;
-        CheckBox drugCheck;
-
-        public viewitem(@NonNull View itemView) {
-            super(itemView);
-             drug = itemView.findViewById(R.id.rochetaHistoryDate);
-             drugCheck = itemView.findViewById(R.id.drugCheck);
-            Log.d("drugs" ,""+ drugsArray);
-        }
     }
 
     @NonNull
     @Override
-    public DrugsAdapter.viewitem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HistoryRochetaAdapter.viewitem onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.custom_drug_item, parent, false);
+                .inflate(R.layout.custom_doctor_history_item, parent, false);
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             }
         });
-        return new viewitem(itemView);
+        return new HistoryRochetaAdapter.viewitem(itemView);
+    }
+
+    public class viewitem extends RecyclerView.ViewHolder {
+
+        TextView rochetaDate, rochetaPatient;
+        ImageView deleteImage;
+        LinearLayout historyRochetaItem;
+        String RochetaId;
+        public viewitem(@NonNull View itemView) {
+            super(itemView);
+            rochetaDate =  itemView.findViewById(R.id.rochetaHistoryDate);
+            rochetaPatient =  itemView.findViewById(R.id.rochetaHistoryPatient);
+            deleteImage = itemView.findViewById(R.id.deleteImage);
+            historyRochetaItem = itemView.findViewById(R.id.historyRochetaItem);
+        }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DrugsAdapter.viewitem holder, int position) {
-        holder.drug.setText("الدواء : "+ drugsArray.get(position).getName());
-        holder.drugCheck.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                purchaseDialog(position).show();
-            }
-        });
+    public void onBindViewHolder(@NonNull HistoryRochetaAdapter.viewitem holder, int position) {
+    holder.rochetaDate.setText(rochetaArray.get(position).getDate());
+    holder.rochetaPatient.setText(rochetaArray.get(position).getPatient());
+
+    // for delete rocheta in history
+    holder.deleteImage.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            deleteDialog(position).show();
+        }
+    });
+    // for click on item
+    holder.historyRochetaItem.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent i = new Intent(context, HistoryDrugs.class);
+            i.putExtra("rocheta_id" , rochetaArray.get(position).getId());
+            v.getContext().startActivity(i);
+        }
+    });
     }
 
     @Override
     public int getItemCount() {
-        return drugsArray.size();
+        return rochetaArray.size();
     }
 
-    private AlertDialog purchaseDialog(int position) {
+    private AlertDialog deleteDialog(int position) {
         AlertDialog alertDialog =new AlertDialog.Builder(context)
-                .setTitle("شراء")
-                .setMessage("هل قمت بشراء هذا الدواء ؟")
+                .setTitle("حذف")
+                .setMessage("هل انت متأكد من حذف هذه الروشيتا ؟")
                 .setPositiveButton("نعم", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        purchaseDrug(position);
+                        deleteRocheta(position);
                         dialog.dismiss();
                     }
                 })
@@ -110,17 +128,15 @@ public class DrugsAdapter extends  RecyclerView.Adapter<DrugsAdapter.viewitem> {
         return alertDialog;
     }
 
-    public void purchaseDrug(int position) {
-        String id = drugsArray.get(position).getId();
+    public void deleteRocheta(int position) {
+        String rocheta_id = rochetaArray.get(position).getId();
         RequestQueue queue = Volley.newRequestQueue(context);
-        final String url = Config.URL+ "drugs/purchaseDrug";
+        final String url = Config.URL+ "rocheta/"+ rocheta_id;
 
         Map<String, String> params = new HashMap<String, String>();
-        params.put("drug_id", id);
-
         JSONObject parameters = new JSONObject(params);
 
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.PUT, url, parameters,
+        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.DELETE, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -128,10 +144,10 @@ public class DrugsAdapter extends  RecyclerView.Adapter<DrugsAdapter.viewitem> {
                         try {
                             boolean success = response.getBoolean("success");
                             if (success) {
-                                drugsArray.remove(position);
+                                rochetaArray.remove(position);
                                 notifyDataSetChanged();
                             } else {
-                                Toast.makeText(context, "حدث خطأ في الاتصال بالانترنت", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "حدث خطا في الاتصال", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException jsonException) {
                             jsonException.printStackTrace();
