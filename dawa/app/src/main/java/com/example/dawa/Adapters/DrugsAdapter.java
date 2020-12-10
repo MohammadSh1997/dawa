@@ -138,28 +138,25 @@ public class DrugsAdapter extends  RecyclerView.Adapter<DrugsAdapter.viewitem> {
                         }
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        Log.d("volley error" , volleyError.getMessage());
-                        String errorDescription = "";
-                        if (volleyError instanceof NetworkError) {
-                            errorDescription = "Network Error";
-                        } else if (volleyError instanceof ServerError) {
-                            errorDescription = "Server Error";
-                        } else if (volleyError instanceof AuthFailureError) {
-                            errorDescription = "AuthFailureError";
-                        } else if (volleyError instanceof ParseError) {
-                            errorDescription = "Parse Error";
-                        } else if (volleyError instanceof NoConnectionError) {
-                            errorDescription = "No Conenction";
-                        } else if (volleyError instanceof TimeoutError) {
-                            errorDescription = "Time Out";
-                        } else {
-                            errorDescription = "Connection Error";
-                        }
-                        Toast.makeText(context, errorDescription, Toast.LENGTH_SHORT).show();
+                volleyError -> {
+                    Log.d("volley error" , volleyError.getMessage());
+                    String errorDescription = "";
+                    if (volleyError instanceof NetworkError) {
+                        errorDescription = "Network Error";
+                    } else if (volleyError instanceof ServerError) {
+                        errorDescription = "Server Error";
+                    } else if (volleyError instanceof AuthFailureError) {
+                        errorDescription = "AuthFailureError";
+                    } else if (volleyError instanceof ParseError) {
+                        errorDescription = "Parse Error";
+                    } else if (volleyError instanceof NoConnectionError) {
+                        errorDescription = "No Conenction";
+                    } else if (volleyError instanceof TimeoutError) {
+                        errorDescription = "Time Out";
+                    } else {
+                        errorDescription = "Connection Error";
                     }
+                    Toast.makeText(context, errorDescription, Toast.LENGTH_SHORT).show();
                 }
         );
         getRequest.setRetryPolicy(new DefaultRetryPolicy(

@@ -98,6 +98,8 @@ public class NewRocheta extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
         final String url = Config.URL+"rocheta/addNewRocheta";
 
+        if (patientId == null)
+            return;
         Map<String, String> params = new HashMap<String, String>();
         params.put("patient_id", patientId);
         params.put("doctor_id", doctorId);
