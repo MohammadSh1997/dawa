@@ -31,9 +31,36 @@ router.get("/user/:user_id" , (req,res)=> {
         if (result) {
             res.send({success: true, id: result.id, doctor: result.doctor, date: `${result.date.getFullYear()}-${result.date.getMonth()+1}-${result.date.getDate()}`})
         } else {
-            res.send({success: false, msg: "حدث خطأ في الاتصال"})
+            res.send({success: false, msg: "لا يوجد اي روشيته لهذا المستخدم"})
         }
-    }).catch(err => console.log(err))
+    }).catch(err => {
+        res.send({success: false, msg: "حدث خطأ في الاتصال"})
+        console.log(err)
+    })
+});
+
+router.get("/user/allRochetas/:user_id" , (req,res)=> {
+    let id = req.params.user_id;
+    database.table("rocheta").join([{
+        table: "users",
+        on: "users.id = rocheta.doctor_id"
+    }]).withFields([
+        "rocheta.id",
+        "date",
+        "CONCAT(users.firstname , ' ' , users.lastname) as doctor",
+    ]).filter({"rocheta.patient_id": id}).sort({"rocheta.id": -1}).getAll().then(result=> {
+        if (result.length) {
+            for (let i = 0; i < result.length; i++) {
+                result[i].date = `${result[i].date.getFullYear()}-${result[i].date.getMonth()+1}-${result[i].date.getDate()}  ${result[i].date.getHours()}:${result[i].date.getMinutes()}`;  
+            }
+            res.send({success: true , result})
+        } else {
+            res.send({success: false, msg: "لا يوجد اي روشيته لهذا المستخدم"})
+        }
+    }).catch(err => {
+        res.send({success: false, msg: "حدث خطأ في الاتصال"})
+        console.log(err)
+    })
 });
 
 router.delete("/:rocheta_id" , (req, res)=>{
@@ -59,7 +86,7 @@ router.get("/doctor/:doctor_id" , (req,res)=> {
     ]).filter({"rocheta.doctor_id": id}).sort({"rocheta.id": -1}).getAll().then(result=> {
         if (result.length > 0) {
             for (let i = 0; i < result.length; i++) {
-                result[i].date = `${result[i].date.getFullYear()}-${result[i].date.getMonth()+1}-${result[i].date.getDate()}`;  
+                result[i].date = `${result[i].date.getFullYear()}-${result[i].date.getMonth()+1}-${result[i].date.getDate()}  ${result[i].date.getHours()}:${result[i].date.getMinutes()}`;  
             }
             res.send({
                 success: true,
@@ -82,7 +109,7 @@ router.post("/addNewRocheta" , (req , res)=> {
     database.table("rocheta").insert({
         doctor_id: doctor_id,
         patient_id: patient_id,
-        date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`,
+        date: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}-${date.getHours()}-${date.getMinutes()}`,
         notes: notes 
     }).then(id=> {
         if (id) {

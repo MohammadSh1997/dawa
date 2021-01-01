@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.NumberPicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import com.example.dawa.Config.Config;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -40,11 +43,23 @@ public class NewDrug extends AppCompatActivity {
     EditText drugName;
     EditText drugDesc;
     NumberPicker drugTimes;
+    Spinner spinner;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_drug);
         drugTimes= findViewById(R.id.numberPicker2);
+        spinner = findViewById(R.id.spinner);
+         ArrayList<String> spinnerArray = new ArrayList<String>();
+         spinnerArray.add("after eat");
+         spinnerArray.add("before eat");
+         spinnerArray.add("before sleep");
+         spinnerArray.add("in the morning");
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, spinnerArray);
+        spinnerArrayAdapter.setDropDownViewResource(android.R.layout
+                .simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerArrayAdapter);
         drugTimes.setMaxValue(4);
         drugTimes.setMinValue(1);
         drugName = findViewById(R.id.historyDrugName);
@@ -66,7 +81,8 @@ public class NewDrug extends AppCompatActivity {
 
     public void saveDrug(View view) {
         String name = drugName.getText().toString();
-        String desc = drugDesc.getText().toString();
+//        String desc = drugDesc.getText().toString();
+        String desc = spinner.getSelectedItem().toString();
         String times = drugTimes.getValue()+"";
 
 

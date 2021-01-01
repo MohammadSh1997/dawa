@@ -63,8 +63,10 @@ public class Login extends AppCompatActivity {
         Intent intent = null;
         if (shared.getString("type" , "").equals("user")) {
             intent = new Intent(Login.this, User.class);
-        } else {
+        } else if (shared.getString("type" , "").equals("doctor")){
             intent = new Intent(Login.this, Doctor.class);
+        } else {
+            intent = new Intent(Login.this, Pharmacist.class);
         }
         startActivity(intent);
         finish();
@@ -101,8 +103,10 @@ public class Login extends AppCompatActivity {
                                 Intent intent = null;
                                 if (shared.getString("type" , "").equals("user")) {
                                     intent = new Intent(Login.this, User.class);
-                                } else {
+                                } else if (shared.getString("type" , "").equals("doctor")){
                                     intent = new Intent(Login.this, Doctor.class);
+                                } else {
+                                    intent = new Intent(Login.this, Pharmacist.class);
                                 }
                                 startActivity(intent);
                                 finish();

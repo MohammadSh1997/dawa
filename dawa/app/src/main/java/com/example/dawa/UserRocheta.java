@@ -28,8 +28,8 @@ public class UserRocheta extends AppCompatActivity {
 
     ListView rochetaList;
     ArrayList<Rocheta> rochetaArray= new ArrayList<>();
-    SharedPreferences shared;
     RochetaAdapter adapter;
+    SharedPreferences shared;
     String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,10 +13,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:text="التاريخ: "
-        android:textAlignment="textEnd"
-        android:layout_gravity="end"
         android:textSize="15dp">
-
     </TextView>
 
     <TextView
@@ -26,7 +23,6 @@
         android:layout_height="wrap_content"
         android:text="الطبيب: "
         android:textSize="15dp">
-
     </TextView>
 
 </LinearLayout>

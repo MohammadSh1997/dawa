@@ -13,7 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true">
-        <activity android:name=".EditDrug"></activity>
+        <activity android:name=".PharmacistUserRochetas"></activity>
+        <activity android:name=".Pharmacist" />
+        <activity android:name=".EditDrug" />
         <activity android:name=".HistoryDrugs" />
         <activity android:name=".DoctorHistory" />
         <activity android:name=".CurrentDrugs" />
